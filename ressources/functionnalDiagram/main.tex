@@ -1,12 +1,6 @@
 \documentclass{article}
 \usepackage{tikz}
 
-% Background invisible
-\usepackage{draftwatermark}
-\SetWatermarkText{DRAFT}
-\SetWatermarkScale{10}
-\SetWatermarkColor[gray]{0.9}
-
 \usetikzlibrary{trees, positioning, calc}
 
 
@@ -35,7 +29,7 @@
   };
 
 % Merged node
-\node (merged) [below=6em of $(delete)!0.5!(water)$, rectangle, draw, rounded corners, top color=blue!40, bottom color=blue!40, align=center] {Saving the Result};
+\node (merged) [below=6em of $(delete)!0.5!(water)$, rectangle, draw, rounded corners, top color=blue!40, bottom color=blue!40, align=center] {Saving()};
 
 % Connect last three children to merged node
 \draw[->] (delete) -- (merged);
