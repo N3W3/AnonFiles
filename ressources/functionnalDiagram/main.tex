@@ -1,0 +1,15 @@
+\documentclass{article}
+\usepackage{tikz}
+\usetikzlibrary{trees}
+
+\begin{document}
+
+\begin{tikzpicture}[sibling distance=10em, every node/.style = {shape=rectangle, rounded corners, draw, align=center, top color=white, bottom color=blue!40}]
+  \node {Start}
+  child { node {main()}
+    child {node {sortParameters()}}
+    child {node {Issue : invalid parameters}}
+  };
+\end{tikzpicture}
+
+\end{document}
