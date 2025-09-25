@@ -1,48 +1,58 @@
 \documentclass{article}
 \usepackage{tikz}
-
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric}
 % Delete page number
 \pagenumbering{gobble}
 
-\usetikzlibrary{trees, positioning, calc}
 
 
 \begin{document}
 
-\begin{tikzpicture}[
-    sibling distance=12em,
-    level distance=6em,
-    every node/.style={rectangle, rounded corners, draw, align=center, top color=blue!40, bottom color=blue!40},
-    special/.style={rectangle, rounded corners, draw, align=center, top color=red!40, bottom color=red!40}
-]
-
-\node {Start}
-  child { node {main()}
-    child {node {sortParameters()}
-      child {node {CheckingPaths()}
-        child {node {ApplyingUserSelection()}
-          child {node (delete) [special] {DeleteMetadata()}}
-          child {node (anon) [special] {Anon identity on File}}
-          child {node (water) [special] {Watermark()}}
+\begin{tikzpicture}
+    \tikzset{
+        mynode/.style={
+            rectangle, draw=blue!40, fill=blue!20, line width=1.5pt, minimum width=2cm, minimum height=1cm
+        },
+        Error/.style={
+            diamond, draw=purple, fill=white, line width=1.5pt, minimum width=2.5cm, minimum height=1.5cm
+        },
+        myarrow/.style={
+            ->, line width=1.2pt
+        },
+        note/.style={
+            draw=none, fill=none, align=center, font=\footnotesize
         }
-        child {node {Error : Invalid Path}}
       }
-    }
-    child {node {Error : invalid parameters}}
-  };
 
-% Merged node
-\node (merged) [below=6em of $(delete)!0.5!(water)$, rectangle, draw, rounded corners, top color=blue!40, bottom color=blue!40, align=center] {Saving()};
+      % Elements
+      \node[mynode] (start) {\Large Start};
+      \node[mynode, right=1cm of start] (main) {\Large int main(char argc, char *argv[])};
+      \node[mynode, below=2cm of main] (sortParam) {\Large void sortParameters()};
+      \node[mynode, left=2cm of sortParam] (isParam) {\Large bool isParam(char *arg)};
+      \node[note, below=2cm of sortParam] (struct) {Parameters Struct : \\
+        char *filePath \\
+        char *outPutPath \\
+        char *currentDirectory \\
+        char **parameters};
+      \node[mynode, below=2cm of struct] (checkingPath) {\Large bool checkingPath()};
+      \node[mynode, below=2cm of checkingPath] (applyUserSelect) {\Large ApplyingUserSelection()};
+      \node[mynode, below=2cm of applyUserSelect] (file) {\Large file.c};
+      \node[mynode, left=1cm and 1cm of file] (metadata) {\Large metadata.c};
+      \node[mynode, right=1cm and 1cm of file] (watermark) {\large watermark.c};
 
-% Connect last three children to merged node
-\draw[->] (delete) -- (merged);
-\draw[->] (anon) -- (merged);
-\draw[->] (water) -- (merged);
+      % Links between elements
+      \draw[myarrow] (start) -- (main);
+      \draw[myarrow] (main) -- (sortParam);
+      \draw[myarrow, bend left] (sortParam) to (isParam);
+      \draw[myarrow, bend left] (isParam) to (sortParam);
+      \draw[myarrow] (sortParam) -- (struct);
+      \draw[myarrow, bend right=70] (struct) to (main);
+      \draw[myarrow, bend left=70] (main) to (checkingPath);
+      \draw[myarrow] (checkingPath) to (applyUserSelect);
+      \draw[myarrow] (applyUserSelect) to (file);
+      \draw[myarrow] (file) to (metadata);
+      \draw[myarrow] (file) to (watermark);
 
-% Continue after merged
-\node (final) [below=6em of merged, rectangle, draw, rounded corners, top color=blue!40, bottom color=blue!40, align=center] {End};
-
-\draw[->] (merged) -- (final);
 
 \end{tikzpicture}
 

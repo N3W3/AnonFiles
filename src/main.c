@@ -40,7 +40,7 @@ int main(int argc, char *argv[]){
 }
 
 /**
- * @brief Getting the parameters, stock them for interpretation
+ * @brief Getting the parameters, stock them in the struct for interpretation
  *
  *
  *
