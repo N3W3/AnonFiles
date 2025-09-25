@@ -1,10 +1,24 @@
 # MetaForge
 
+## Table of Content
+
+## Introduction
+
 ## Documentation
 
-## Functionnal diagram 
+## Functionnal diagrams
 
-### Main.c
+### main.c
 ![Functionnal Diagram main.c](ressources/functionnalDiagram/main-1.png)
 
-### Metadata.c
+### metadata.c
+
+### waterMark.c
+
+### saving.c
+
+## Exemples 
+
+### Metadata 
+
+### WaterMark

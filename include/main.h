@@ -10,10 +10,10 @@
  * The structure who stock all the informations send by the user
  * */
 typedef struct Parameters{
-    char *filePath;
-    char *outPutPath;
-    char *currentPath;
-    char **parameters;
+    char *filePath; // The Selected File
+    char *outPutPath; // Saving destination
+    char *currentPath; // Where the file is executed in the system
+    char **parameters; // Parameters selected by the user
 }Parameters;
 
 /**
@@ -21,6 +21,9 @@ typedef struct Parameters{
 */
 void sortParam(int *argc, char *argv[], Parameters *p);
 
+/**
+ *
+ * */
 bool isParameters(char *arg);
 
 #endif // MAIN_H
